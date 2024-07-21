@@ -2,7 +2,7 @@ package com.rakesh.capp.services;
 
 import java.util.List;
 
-import com.rakesh.capp.modal.User;
+import com.rakesh.capp.domain.User;
 
 public interface UserService {
 		public static final Integer LOGIN_STATUS_ACTIVE = 1;

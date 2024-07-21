@@ -2,14 +2,15 @@ package com.rakesh.capp.services;
 
 import java.util.List;
 
-import com.rakesh.capp.modal.User;
+import com.rakesh.capp.domain.User;
 
 public class UserServiceImpl implements UserService {
 
+	private UserDao userDao;
+	
 	@Override
 	public void register(User u) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override

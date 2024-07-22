@@ -2,8 +2,11 @@ package com.rakesh.capp.services;
 
 import java.util.List;
 
-import com.rakesh.capp.domain.User;
+import org.springframework.stereotype.Service;
 
+import com.rakesh.capp.domain.User;
+import com.rakesh.capp.exception.UserBlockedException;
+@Service
 public interface UserService {
 		public static final Integer LOGIN_STATUS_ACTIVE = 1;
 		public static final Integer LOGIN_STATUS_BLOCKED = 2;
@@ -13,7 +16,7 @@ public interface UserService {
 		
 		public void register(User u);
 		
-		public User login(String loginName, String password);
+		public User login(String loginName, String password) throws UserBlockedException;
 		
 		public List<User> getAllUser(String prop, Object propValue);
 		

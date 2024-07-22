@@ -8,10 +8,11 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
 import com.rakesh.capp.domain.Contact;
 import com.rakesh.capp.rm.ContactRowMapper;
-
+@Repository
 public class ContactDAOImpl extends BaseDAO implements ContactDAO {
 
 	@Override

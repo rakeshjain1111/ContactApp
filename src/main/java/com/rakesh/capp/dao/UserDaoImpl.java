@@ -8,10 +8,11 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
 import com.rakesh.capp.domain.User;
 import com.rakesh.capp.rm.UserRowMapper;
-
+@Repository
 public class UserDaoImpl extends BaseDAO implements UserDao {
 
 	@Override

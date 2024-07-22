@@ -2,15 +2,22 @@ package com.rakesh.capp.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.rakesh.capp.dao.BaseDAO;
+import com.rakesh.capp.dao.UserDao;
 import com.rakesh.capp.domain.User;
-
-public class UserServiceImpl implements UserService {
-
+@Service
+public class UserServiceImpl extends BaseDAO implements UserService {
+    
+	
+	@Autowired
 	private UserDao userDao;
 	
 	@Override
 	public void register(User u) {
-		
+		userDao.save(u);
 	}
 
 	@Override
@@ -21,20 +28,17 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> getAllUser(String prop, Object propValue) {
-		// TODO Auto-generated method stub
-		return null;
+		return userDao.findByProperty(prop, propValue);
 	}
 
 	@Override
 	public int updateUser(User u) {
-		// TODO Auto-generated method stub
-		return 0;
+		return userDao.update(u);
 	}
 
 	@Override
 	public void deleteUser(Integer userId) {
-		// TODO Auto-generated method stub
-
+		userDao.deleteById(userId);
 	}
 
 	@Override

@@ -1,6 +1,8 @@
 package com.rakesh.capp.services;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.rakesh.capp.dao.BaseDAO;
 import com.rakesh.capp.dao.UserDao;
 import com.rakesh.capp.domain.User;
+import com.rakesh.capp.exception.UserBlockedException;
+import com.rakesh.capp.rm.UserRowMapper;
 @Service
 public class UserServiceImpl extends BaseDAO implements UserService {
     
@@ -22,8 +26,22 @@ public class UserServiceImpl extends BaseDAO implements UserService {
 
 	@Override
 	public User login(String loginName, String password) {
-		// TODO Auto-generated method stub
-		return null;
+         String query ="SELECT userid, name, phone, email, address, role, loginStatus, loginName"+"From user WHERE loginName =:In AND password=:pw";
+         Map  m =new HashMap();
+         m.put("In",loginName);
+		 m.put("pw", password);
+		 try {
+		   User u=	getNamedParameterJdbcTemplate().queryForObject(query, m, new UserRowMapper());
+			if(u.getLoginStatus().equals(UserService.LOGIN_STATUS_BLOCKED)) {
+				throw new UserBlockedException("Your Account has been blocked, Contact to admin");
+			}
+			else {
+				return u;
+			}
+		} catch (Exception e) {
+			return null;
+		}
+		
 	}
 
 	@Override

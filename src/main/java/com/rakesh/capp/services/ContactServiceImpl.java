@@ -3,13 +3,14 @@ package com.rakesh.capp.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.rakesh.capp.dao.BaseDAO;
 import com.rakesh.capp.dao.ContactDAO;
 import com.rakesh.capp.domain.Contact;
 import com.rakesh.capp.rm.ContactRowMapper;
 import com.rakesh.capp.utility.StringUtil;
-
+@Service
 public class ContactServiceImpl extends BaseDAO implements ContactService {
     
 	@Autowired

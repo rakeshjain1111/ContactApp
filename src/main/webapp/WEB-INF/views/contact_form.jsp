@@ -7,14 +7,13 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Contact App - Login Form</title>
+<title>Contact App - Contact  Form</title>
 <s:url value="/static/css/style.css" var="url_css"></s:url>
 <link href="${url_css}" rel="stylesheet">
 </head>
 <s:url value="/static/img/bg.jpg" var="bg_img"></s:url>
 
 <body background="${bg_img}">
-
 <table border="1" width="80%" align="center">
     <tr>
         <td height="100px">
@@ -32,27 +31,34 @@
     <c:if test="${err!=null }">
           <p class="error">${err}</p>
     </c:if>
-    <h3>User Login</h3>
-      <c:if test="${param.act eq 'reg' }">
-          <p class="success">Registration Successfully...To Continue Login</p>
-    </c:if>
-        <s:url value="/login" var="url_login"/>
-        <h3 align="center">User Login</h3>
-       <f:form action="${url_login}" modelAttribute="command">
+        
+        <s:url value="/user/saveContact" var="url_regi_contact"/>
+        <h3 align="center">User Registration</h3>
+       <f:form action="${url_regi_contact}" modelAttribute="command">
        		<table border="1" align="center">
-       		     <tr>
-       		         <td>Username</td>
-       		         <td><f:input path="loginName"/></td>
+       		      <tr>
+       		         <td>Name</td>
+       		         <td><f:input path="name"/></td>
        		     </tr>
        		      <tr>
-       		         <td>Password</td>
-       		         <td><f:password path="password"/></td>
+       		         <td>Phone</td>
+       		         <td><f:input path="phone"/></td>
        		     </tr>
+       		      <tr>
+       		         <td>Email</td>
+       		         <td><f:input path="email"/></td>
+       		     </tr>
+       		      <tr>
+       		         <td>Address</td>
+       		         <td><f:textarea path="address"/></td>
+       		     </tr>
+       		      <tr>
+       		         <td>Remark</td>
+						<td><f:textarea path="remark"/></td>       		
+  				   </tr>
        		      <tr>
        		         <td colspan="2" align="right">
-       		            <button>Login</button>
-       		            <s:url var="url_regi" value="/regi_form"/>
-       		            <a href="${url_regi}">New User Registration</a>
+       		            <button>Save</button>
        		         </td>
        		     </tr>
        		</table>

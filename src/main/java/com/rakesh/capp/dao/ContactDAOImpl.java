@@ -35,7 +35,7 @@ public class ContactDAOImpl extends BaseDAO implements ContactDAO {
 	@Override
 	public void update(Contact c) {
 		
-		String query = "update contact set "+"name=:name,"+"phone=:phone."+"email=:email,"+"address=:address,"+"remark=:remark where contactid=:contactid";
+		String query = "update contact set "+"name=:name,"+"phone=:phone,"+"email=:email,"+"address=:address,"+"remark=:remark where contactid=:contactid";
 		Map m = new HashMap();
 		m.put("name", c.getName());
 		m.put("phone", c.getPhone());
@@ -73,7 +73,7 @@ public class ContactDAOImpl extends BaseDAO implements ContactDAO {
 
 	@Override
 	public List<Contact> findByProperty(String prop, Object propValue) {
-		String query = "SELECT contactid, userid, name, phone, email, address, remark FROM contact WHERE" +prop+"=?";
+		String query = "SELECT contactid, userid, name, phone, email, address, remark FROM contact WHERE "+prop+"= ?";
 		List<Contact> contacts=  super.getJdbcTemplate().query(query,new ContactRowMapper(),propValue);
 		return contacts;
 	}

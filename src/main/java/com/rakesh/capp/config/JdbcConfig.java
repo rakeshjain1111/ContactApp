@@ -11,7 +11,7 @@ public class JdbcConfig {
 	@Bean("ds")
 	public BasicDataSource getDataSource() {
 		BasicDataSource ds =new BasicDataSource();
-		ds.setDriverClassName("com.mysql.jdbc.Driver");
+		ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
 		ds.setUrl("jdbc:mysql://localhost:3306/cappdb");
 		ds.setUsername("root");
 		ds.setPassword("root");

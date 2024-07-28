@@ -9,6 +9,7 @@ public interface ContactService {
     public void update(Contact c);
     public void delete(Integer contactId);
     public void delete(Integer[] contactIds);
+    public Contact findById(Integer contactId);
     public List<Contact> findUserContact(Integer userId);
     public List<Contact> findUserContact(Integer userId, String txt);
 }

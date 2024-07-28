@@ -44,9 +44,14 @@ public class ContactServiceImpl extends BaseDAO implements ContactService {
 
 	@Override
 	public List<Contact> findUserContact(Integer userId, String txt) {
-		String q = "SELECT contactid ,userid, name, phone, email, address, remark FROM contact WHERE userid = ? AND (name LIKE '%"+txt+"%' OR address LIKE '%"+txt+"%' OR phone LIKE '%"+txt+"%' OR email LIKE '%"+txt+"%' OR remark LIKE '%"+txt+"%')";
+		String q = "SELECT contactid, userid, name, phone, email, address, remark FROM contact WHERE userid = ? AND (name LIKE '%"+txt+"%' OR address LIKE '%"+txt+"%' OR phone LIKE '%"+txt+"%' OR email LIKE '%"+txt+"%' OR remark LIKE '%"+txt+"%')";
 		List<Contact> clist = super.getJdbcTemplate().query(q, new ContactRowMapper() ,userId);
 		return clist;
+	}
+
+	@Override
+	public Contact findById(Integer contactId) {
+		return  contactDAO.findById(contactId);
 	}
 
 }

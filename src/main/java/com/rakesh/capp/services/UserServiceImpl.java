@@ -52,6 +52,11 @@ public class UserServiceImpl extends BaseDAO implements UserService {
 	public List<User> getAllUser(String prop, Object propValue) {
 		return userDao.findByProperty(prop, propValue);
 	}
+	
+	@Override
+	public List<User> getUserList() {
+		return userDao.findByProperty("role", UserService.ROLE_USER);
+	}
 
 	@Override
 	public int updateUser(User u) {
@@ -71,19 +76,27 @@ public class UserServiceImpl extends BaseDAO implements UserService {
 
 	@Override
 	public void changeLoginStatus(Integer userId, Integer loginStatus) {
-		// TODO Auto-generated method stub
-
+			String query ="UPDATE user SET loginStatus=:lst WHERE userId=:uid";
+			   Map  m =new HashMap();
+		       m.put("lst",loginStatus);
+			   m.put("uid", userId);
+			   getNamedParameterJdbcTemplate().update(query, m);
 	}
 
 	@Override
 	public boolean isUserAvailable(String loginName) {
-		// TODO Auto-generated method stub
-		return false;
+		String query= "SELECT count(loginName) FROM user WHERE loginName= ?";
+		Integer count = getJdbcTemplate().queryForObject(query, new String[] {loginName}, Integer.class);
+		if(count==1)
+		{
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	@Override
 	public boolean isEmailAvailable(String email) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

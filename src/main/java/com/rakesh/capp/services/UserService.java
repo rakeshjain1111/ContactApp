@@ -26,6 +26,8 @@ public interface UserService {
 		
 		public User getUser(Integer userId);
 		
+		public List<User> getUserList();
+		
 		public void changeLoginStatus(Integer userId, Integer loginStatus);
 		
 		public boolean isUserAvailable(String loginName);

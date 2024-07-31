@@ -83,7 +83,7 @@ public class UserDaoImpl extends BaseDAO implements UserDao {
 
 	@Override
 	public List<User> findByProperty(String prop, Object propValue) {
-		String query ="Select  userid, name,phone,email,address,loginName,role,loginStatus FROM user where" +prop+"=?";
+		String query ="Select  userid, name, phone, email ,address, loginName, role, loginStatus FROM user where "+prop+"=?";
 		List<User> users = super.getJdbcTemplate().query(query, new UserRowMapper(),propValue);
 		return users;
 	}

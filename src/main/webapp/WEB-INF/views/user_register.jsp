@@ -10,6 +10,8 @@
 <title>Contact App - Registration  Form</title>
 <s:url value="/static/css/style.css" var="url_css"></s:url>
 <link href="${url_css}" rel="stylesheet">
+<s:url value="/static/js/jquery-3.7.1.min.js" var="url_jqlib"/>
+<script src="${url_jqlib}" type="text/javascript"></script>
 </head>
 <s:url value="/static/img/bg.jpg" var="bg_img"></s:url>
 
@@ -54,7 +56,11 @@
        		     </tr>
        		     <tr>
        		         <td>Username</td>
-       		         <td><f:input path="user.loginName"/></td>
+       		         <td><f:input path="user.loginName" id="id_loginName"/>
+       		             <button type="button" id="id_check_avail">Check Availability</button>
+       		         	<div id="id_res_div" class="error "></div>
+       		         </td>
+       		     
        		     </tr>
        		      <tr>
        		         <td>Password</td>
@@ -75,5 +81,18 @@
         </td>
     </tr>
 </table>
+<script type="text/javascript">
+      $(document).ready(function () {
+    	  $("#id_check_avail").click(function(){
+    		  $.ajax({
+    			  url : 'check_avail',
+    			  data : {loginName : $("#id_loginName").val()} ,
+    			  success :function(data){
+    				  	$("#id_res_div").html(data);
+    			  }
+    		  });
+    	  });
+      });
+</script>
 </body>
 </html>

@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rakesh.capp.command.LoginCommand;
 import com.rakesh.capp.command.UserCommand;
@@ -92,6 +94,38 @@ public class UserController {
 	@RequestMapping(value = "/admin/dashboard")
 	public String adminDashboard() {
 		return "admin_dashboard";
+	}
+	
+	@RequestMapping(value = "/admin/changeStatus")
+	@ResponseBody
+	public String changeStatus(@RequestParam Integer userId, @RequestParam Integer loginStatus) {
+		try {
+			userService.changeLoginStatus(userId, loginStatus);
+			return "SUCCESS: Status Changed";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "ERROR: Unable to change Status";
+		}
+	}
+	
+	@RequestMapping(value = "/check_avail")
+	@ResponseBody
+	public String checkAvailability(@RequestParam String loginName) {
+		
+		System.out.println(loginName);
+		if(userService.isUserAvailable(loginName)) {
+			return "This usename is already taken. Choose another name";
+		}else {
+			return "Yes ! You can take this";
+		}
+	}
+	
+	
+	
+	@RequestMapping(value = "/admin/users")
+	public String getUsersList(Model m) {
+		m.addAttribute("usersList",userService.getUserList());
+		return "users";
 	}
 	
 	private void addUserInSession(User u, HttpSession session) 
